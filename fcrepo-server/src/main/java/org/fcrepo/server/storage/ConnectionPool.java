@@ -332,14 +332,19 @@ public class ConnectionPool {
     public void free(Connection connection) {
         try {
             // ensure connections returned to pool as read-only
-            setConnectionReadOnly(connection, true);
-            if (!connection.isClosed()) connection.close();
+            // FLVC backported a 3.8.x fix as follows:
+
+            if (!connection.isClosed()) {
+                setConnectionReadOnly(connection, true);
+                connection.close();
+            } else {
+                logger.warn("Ignoring attempt to close a previously closed connection");
+            }
+
         } catch (SQLException sqle) {
             logger.warn("Unable to close connection", sqle);
         } finally {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Returned connection to pool (" + toString() + ")");
-            }
+            logger.warn("Returned connection to pool(" + toString() + ")");
         }
     }
 
