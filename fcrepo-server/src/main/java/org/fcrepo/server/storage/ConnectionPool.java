@@ -344,7 +344,9 @@ public class ConnectionPool {
         } catch (SQLException sqle) {
             logger.warn("Unable to close connection", sqle);
         } finally {
-            logger.warn("Returned connection to pool(" + toString() + ")");
+            if (logger.isDebugEnabled()) {
+                logger.debug("Returned connection to pool (" + toString() + ")");
+            }
         }
     }
 
