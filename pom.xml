@@ -127,7 +127,7 @@
     <spring.version>3.0.7.RELEASE</spring.version>
     <trippi.version>1.5.10</trippi.version>
     <powermock.version>1.5.1</powermock.version>
-    <httpcomponents.version>4.2.5</httpcomponents.version>
+    <httpcomponents.version>4.5.13</httpcomponents.version>
     <httpcore.version>4.2.4</httpcore.version>
     <xacml.version>2.0.9.Final</xacml.version>
   </properties>
